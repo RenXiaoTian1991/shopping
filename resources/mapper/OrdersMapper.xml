@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Orders" >
+
+    <select id="selectOrderByStatus" parameterType="map" resultType="Orders" >
+        SELECT * FROM orders WHERE userId=#{userId} and orderstatus=#{orderstatus}
+    </select>
+
+    <select id="selectOrderById" parameterType="Integer" resultType="Orders" >
+        SELECT * FROM orders WHERE id=#{id}
+    </select>
+
+    <update id="updateOrder" parameterType="Orders" >
+        UPDATE orders SET orderstatus=#{orderstatus},paytime=#{paytime} WHERE id=#{id}
+    </update>
+
+    <update id="updateOrderStatus" parameterType="Integer" >
+        UPDATE orders SET goodstatus=1 WHERE id=#{id}
+    </update>
+
+    <select id="findOrderByGoodIdAndUserId" parameterType="map" resultType="Orders">
+       SELECT * FROM orders WHERE goodId=#{goodId} and userId=#{userId} ORDER BY id DESC limit 1
+    </select>
+
+    <insert id="createOrder" parameterType="Orders">
+        INSERT INTO orders(ordersn,amount,createtime,orderstatus,userId,goodId,username,address,phone,price,goodnum,goodName,goodstatus) VALUES (#{ordersn},#{amount},#{createtime},#{orderstatus},#{userId},#{goodId},#{username},#{address},#{phone},#{price},#{goodnum},#{goodName},#{goodstatus})
+    </insert>
+
+</mapper>

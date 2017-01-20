@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration >
+    
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender"> 
+        <encoder charset="UTF-8"> <!-- encoder 可以指定字符集，对于中文输出有意义 -->
+            <pattern>%d{MM:dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender> 
+    
+    <!-- Error Log -->
+    <appender name="error_logs" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logRoot}/shopping/logs/error-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- additivity 属性表示是否使用root的logger. -->
+    <logger name="net.iotek" level="${logLevel}"  additivity="${logAdditivity}">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+    <logger name="unkown_error" level="${logLevel}">
+        <appender-ref ref="error_logs"/>
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+    <!-- 输出到控制台和文件，可定义更多的 Appender -->
+    <root level="${logLevel}">
+        <appender-ref ref="${logDefaultFile}" />
+    </root>
+ 
+</configuration>

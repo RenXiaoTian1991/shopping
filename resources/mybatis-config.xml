@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+    </settings>
+
+    <typeAliases>
+        <typeAlias alias="Comment" type="net.iotek.entity.Comment"/>
+        <typeAlias alias="Good" type="net.iotek.entity.Good"/>
+        <typeAlias alias="Orders" type="net.iotek.entity.Orders"/>
+        <typeAlias alias="Storage" type="net.iotek.entity.Storage"/>
+        <typeAlias alias="User" type="net.iotek.entity.User"/>
+    </typeAliases>
+    <mappers>
+        <mapper resource="mapper/CommentMapper.xml"/>
+        <mapper resource="mapper/GoodMapper.xml"/>
+        <mapper resource="mapper/OrdersMapper.xml"/>
+        <mapper resource="mapper/StorageMapper.xml"/>
+        <mapper resource="mapper/UserMapper.xml"/>
+    </mappers>
+</configuration>

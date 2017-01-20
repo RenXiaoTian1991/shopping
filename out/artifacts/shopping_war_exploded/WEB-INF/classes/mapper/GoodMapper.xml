@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Good" >
+
+    <select id="goodList" resultType="Good">
+        SELECT * FROM good
+    </select>
+
+    <select id="findGoodById" resultType="Good" parameterType="Integer">
+        SELECT * FROM good WHERE id=#{id}
+    </select>
+
+    <select id="findGoodOnline" resultType="Good">
+        SELECT * FROM good WHERE isonline=1
+    </select>
+
+    <insert id="addGood" parameterType="Good" >
+        INSERT INTO good VALUES(#{id},#{name},#{price},#{pic},#{stock},#{isonline},#{detail},#{createtime})
+    </insert>
+
+    <delete id="deleteGood" parameterType="Integer">
+        DELETE FROM good WHERE id=#{id}
+    </delete>
+
+    <update id="updateGood" parameterType="Good">
+        UPDATE good SET name=#{name},price=#{price},<if test="pic!=null"> pic=#{pic},</if>stock=#{stock},isonline=#{isonline},detail=#{detail} WHERE id=#{id}
+    </update>
+
+</mapper>

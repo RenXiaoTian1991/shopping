@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Storage" >
+
+    <insert id="addGood" parameterType="Storage">
+        INSERT INTO storage VALUES (#{id},#{goodId},#{goodnum},#{userId},#{createtime})
+    </insert>
+
+    <select id="findById" parameterType="Integer" resultType="Storage">
+        SELECT * FROM storage WHERE id=#{id}
+    </select>
+
+    <select id="findIsExist" parameterType="map" resultType="int">
+        SELECT count(1) FROM storage WHERE userId=#{userId} and goodId=#{goodId}
+    </select>
+
+    <select id="storageGoodNum" parameterType="Long" resultType="int">
+        SELECT count(1) FROM storage WHERE userId=#{userId}
+    </select>
+
+    <update id="updateGoodNum"  parameterType="map">
+        UPDATE storage SET goodNum=goodNum+1 WHERE  userId=#{userId} and goodId=#{goodId}
+    </update>
+
+    <select id="showStorage" parameterType="Long" resultType="net.iotek.entity.result.StorageGood">
+        SELECT * FROM storage s,good g WHERE s.goodId=g.id AND s.userId=#{userId}
+    </select>
+
+    <delete id="delStorageGood" parameterType="Integer">
+        DELETE FROM storage WHERE id=#{id}
+    </delete>
+
+</mapper>
